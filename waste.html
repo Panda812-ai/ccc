@@ -110,6 +110,9 @@
         <div class="excel-actions">
             <button class="button" onclick="addRow()">Add Row</button>
             <button class="button" onclick="exportTable()">Export to CSV</button>
+            <button class="button" onclick="saveWasteData()">Save Data</button>
+            <input type="date" id="downloadDate" style="margin-left:18px; padding:8px 12px; border-radius:8px; border:1px solid #415a77; background:#1b263b; color:#e0e6ed; font-size:1rem;">
+            <button class="button" onclick="exportByDate()">Download By Date</button>
         </div>
         <div style="text-align:center; margin-bottom:18px;">
             <input
@@ -296,6 +299,42 @@
             .then(res => res.json())
             .then(res => alert(res.message))
             .catch(() => alert('Error saving data!'));
+        }
+
+        function exportByDate() {
+            const date = document.getElementById('downloadDate').value;
+            if (!date) {
+                alert('Please select a date first.');
+                return;
+            }
+            const table = document.getElementById('excelTable');
+            let csv = [];
+            const rows = table.querySelectorAll('tbody tr');
+            for (let i = 0; i < rows.length; i++) {
+                const cols = rows[i].querySelectorAll('th, td');
+                const dateInput = cols[2].querySelector('input[type="date"]');
+                if (dateInput && dateInput.value === date) {
+                    let row = [];
+                    for (let j = 0; j < cols.length - 1; j++) { // skip delete column
+                        let input = cols[j].querySelector('input, select');
+                        row.push(input ? (input.tagName === 'SELECT' ? input.value : input.value) : cols[j].innerText);
+                    }
+                    if (row.length) csv.push(row.join(','));
+                }
+            }
+            if (csv.length === 0) {
+                alert('No data found for the selected date.');
+                return;
+            }
+            // Download CSV
+            const csvFile = new Blob([csv.join('\n')], {type: "text/csv"});
+            const downloadLink = document.createElement("a");
+            downloadLink.download = "waste_data_" + date + ".csv";
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         }
     </script>
 </body>
