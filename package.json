@@ -1,0 +1,31 @@
+{
+  "name": "brewed-awakenings",
+  "version": "1.0.0",
+  "description": "A fictional coffee shop website featuring a menu, blog, and user authentication.",
+  "main": "src/index.tsx",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-router-dom": "^5.1.7"
+  },
+  "keywords": [
+    "coffee",
+    "shop",
+    "website",
+    "react"
+  ],
+  "author": "Fictional Author",
+  "license": "MIT"
+}
