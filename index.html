@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To CCC System</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+    <style>
+        .loader-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(27,38,59,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            display: none;
+        }
+        .loader {
+            border: 7px solid #e0e6ed;
+            border-top: 7px solid #1b6ca8;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader"></div>
+    </div>
+    <header>
+        <div class="logo">
+            <img src="images/alborj1.png" alt="al-borj">
+        </div>
+    </header>
+    <main>
+        <h1>Welcome To CCC System</h1>
+        <div class="buttons">
+            <button class="button" onclick="navigateWithLoader('login.html')">Login</button>
+            <button class="button" onclick="navigateWithLoader('register.html')">Register</button>
+        </div>
+    </main>
+    <script>
+        function navigateWithLoader(url) {
+            document.getElementById('loaderOverlay').style.display = 'flex';
+            setTimeout(function() {
+                window.location.href = url;
+            }, 900); // يمكنك تعديل الوقت حسب رغبتك
+        }
+    </script>
+</body>
+</html>

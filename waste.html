@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste System | Alborj</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .excel-table {
+            width: 100%;
+            max-width: 2000px;
+            margin: 32px auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #1b263b;
+            color: #e0e6ed;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(65,90,119,0.13);
+        }
+        .excel-table th, .excel-table td {
+            border: 1px solid #415a77;
+            padding: 12px 8px;
+            text-align: center;
+        }
+        .excel-table th {
+            background: linear-gradient(90deg, #415a77 60%, #1b6ca8 100%);
+            font-weight: bold;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+        .excel-table td input,
+        .excel-table td select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #e0e6ed;
+            text-align: center;
+            font-size: 1rem;
+            padding: 6px 2px;
+            border-radius: 6px;
+        }
+        .excel-table td input:focus,
+        .excel-table td select:focus {
+            outline: 2px solid #1b6ca8;
+            background: #273a56;
+        }
+        .excel-table td select {
+            background: #273a56;
+            color: #e0e6ed;
+        }
+        .excel-table td button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #e63946;
+            transition: color 0.2s;
+        }
+        .excel-table td button:hover {
+            color: #ff1744;
+        }
+        .excel-actions {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .excel-actions button {
+            margin: 0 6px;
+            padding: 8px 22px;
+            font-size: 1rem;
+            border-radius: 22px;
+        }
+        @media (max-width: 900px) {
+            .excel-table {
+                font-size: 0.93rem;
+                max-width: 98vw;
+            }
+            .excel-table th, .excel-table td {
+                padding: 7px 2px;
+            }
+        }
+        @media (max-width: 600px) {
+            .excel-table {
+                font-size: 0.85rem;
+            }
+            .excel-actions button {
+                padding: 7px 10px;
+                font-size: 0.95rem;
+            }
+        }
+        .excel-table td input[type="text"][placeholder="Description"] {
+            min-width: 180px;
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/alborj1.png" alt="logo">
+        </div>
+        <div style="margin-left:auto;">
+            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    <main>
+        <h1>Waste Management System</h1>
+        <p style="margin-bottom:24px;">Manage and track waste data.</p>
+        <div class="excel-actions">
+            <button class="button" onclick="addRow()">Add Row</button>
+            <button class="button" onclick="exportTable()">Export to CSV</button>
+        </div>
+        <div style="text-align:center; margin-bottom:18px;">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by Camera No..."
+                style="width:260px; padding:8px 12px; border-radius:8px; border:1px solid #415a77; background:#1b263b; color:#e0e6ed; font-size:1rem;"
+                oninput="filterTable()"
+            >
+        </div>
+        <div style="overflow-x:auto;">
+        <table class="excel-table" id="excelTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Camera No</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Date Updated</th>
+                    <th>Time Updated</th>
+                    <th>Note</th>
+                    <th>Sharing</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" placeholder="Camera No"></td>
+                    <td><input type="date" placeholder="Date"></td>
+                    <td><input type="time" placeholder="Time"></td>
+                    <td><input type="text" placeholder="Description"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Choose</option>
+                            <option value="Solved">Solved</option>
+                            <option value="Unsolved">Unsolved</option>
+                        </select>
+                    </td>
+                    <td><input type="date" placeholder="Date Updated"></td>
+                    <td><input type="time" placeholder="Time Updated"></td>
+                    <td><input type="text" placeholder="Note"></td>
+                    <td><input type="text" placeholder="Sharing"></td>
+                    <td><button onclick="deleteRow(this)" title="Delete Row">🗑️</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Alborj. All rights reserved.
+    </footer>
+    <script>
+        function logout() {
+            window.location.href = "index.html";
+        }
+
+        function addRow() {
+            // اطلب من المستخدم اسم الكاميرا
+            let cameraNo = prompt("Enter Camera No:");
+            if (!cameraNo || cameraNo.trim() === "") {
+                alert("Camera No is required!");
+                return;
+            }
+
+            const table = document.getElementById('excelTable').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length + 1;
+
+            // Get today's date in yyyy-mm-dd format
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const dateStr = `${yyyy}-${mm}-${dd}`;
+
+            // Get current time in hh:mm format
+            const hh = String(today.getHours()).padStart(2, '0');
+            const min = String(today.getMinutes()).padStart(2, '0');
+            const timeStr = `${hh}:${min}`;
+
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td>${rowCount}</td>
+                <td><input type="text" placeholder="Camera No" value="${cameraNo}"></td>
+                <td><input type="date" placeholder="Date" value="${dateStr}"></td>
+                <td><input type="time" placeholder="Time" value="${timeStr}"></td>
+                <td><input type="text" placeholder="Description" style="min-width:180px;max-width:300px;width:100%;"></td>
+                <td>
+                    <select>
+                        <option value="" selected>Choose</option>
+                        <option value="Solved">Solved</option>
+                        <option value="Unsolved">Unsolved</option>
+                    </select>
+                </td>
+                <td><input type="date" placeholder="Date Updated"></td>
+                <td><input type="time" placeholder="Time Updated"></td>
+                <td><input type="text" placeholder="Note"></td>
+                <td><input type="text" placeholder="Sharing"></td>
+                <td><button onclick="deleteRow(this)" title="Delete Row">🗑️</button></td>
+            `;
+        }
+
+        function deleteRow(btn) {
+            const row = btn.closest('tr');
+            row.parentNode.removeChild(row);
+            updateRowNumbers();
+        }
+
+        function updateRowNumbers() {
+            const table = document.getElementById('excelTable').getElementsByTagName('tbody')[0];
+            for (let i = 0; i < table.rows.length; i++) {
+                table.rows[i].cells[0].innerText = i + 1;
+            }
+        }
+
+        function exportTable() {
+            const table = document.getElementById('excelTable');
+            let csv = [];
+            const rows = table.querySelectorAll('tr');
+            for (let i = 0; i < rows.length; i++) {
+                let row = [], cols = rows[i].querySelectorAll('th, td');
+                for (let j = 0; j < cols.length - 1; j++) { // skip delete column
+                    let input = cols[j].querySelector('input, select');
+                    row.push(input ? (input.tagName === 'SELECT' ? input.value : input.value) : cols[j].innerText);
+                }
+                if (row.length) csv.push(row.join(','));
+            }
+            // Download CSV
+            const csvFile = new Blob([csv.join('\n')], {type: "text/csv"});
+            const downloadLink = document.createElement("a");
+            downloadLink.download = "waste_data.csv";
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+
+        function filterTable() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const table = document.getElementById('excelTable');
+            const trs = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            for (let i = 0; i < trs.length; i++) {
+                // Only search in Camera No column (second column)
+                const cameraCell = trs[i].cells[1];
+                let cameraValue = "";
+                if (cameraCell) {
+                    const inputField = cameraCell.querySelector('input');
+                    cameraValue = inputField ? inputField.value.toLowerCase() : cameraCell.innerText.toLowerCase();
+                }
+                if (cameraValue.indexOf(input) > -1) {
+                    trs[i].style.display = '';
+                } else {
+                    trs[i].style.display = 'none';
+                }
+            }
+        }
+
+        function saveWasteData() {
+            const table = document.getElementById('excelTable');
+            const rows = table.querySelectorAll('tbody tr');
+            let data = [];
+            for (let i = 0; i < rows.length; i++) {
+                const cols = rows[i].querySelectorAll('td');
+                data.push({
+                    cameraNo: cols[1].querySelector('input').value,
+                    date: cols[2].querySelector('input').value,
+                    time: cols[3].querySelector('input').value,
+                    description: cols[4].querySelector('input').value,
+                    status: cols[5].querySelector('select').value,
+                    dateUpdated: cols[6].querySelector('input').value,
+                    timeUpdated: cols[7].querySelector('input').value,
+                    note: cols[8].querySelector('input').value,
+                    sharing: cols[9].querySelector('input').value
+                });
+            }
+            fetch('/save-waste', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => alert(res.message))
+            .catch(() => alert('Error saving data!'));
+        }
+    </script>
+</body>
+</html>
