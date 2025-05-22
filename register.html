@@ -13,12 +13,12 @@
         </div>
     </header>
     <main>
-        <form class="form" autocomplete="off">
+        <form class="form" autocomplete="off" onsubmit="registerUser(event)">
             <h2>Register</h2>
-            <input type="text" placeholder="Username" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <input type="password" placeholder="Confirm Password" required>
+            <input type="text" id="reg-username" placeholder="Username" required>
+            <input type="email" id="reg-email" placeholder="Email" required>
+            <input type="password" id="reg-password" placeholder="Password" required>
+            <input type="password" id="reg-confirm" placeholder="Confirm Password" required>
             <button type="submit">Register</button>
             <p style="margin-top:16px;">
                 Already have an account?
@@ -29,5 +29,33 @@
     <footer>
         &copy; 2025 Brewed Awakenings. All rights reserved.
     </footer>
+    <script>
+    async function registerUser(event) {
+        event.preventDefault();
+        const username = document.getElementById('reg-username').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirm = document.getElementById('reg-confirm').value;
+
+        if (password !== confirm) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        // إرسال البيانات إلى السيرفر لإضافتها إلى users.json
+        const res = await fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, email, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            alert('Registration successful! You can now login.');
+            window.location.href = 'login.html';
+        } else {
+            alert(data.message || 'Registration failed.');
+        }
+    }
+    </script>
 </body>
 </html>
