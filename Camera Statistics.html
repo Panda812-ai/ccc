@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Statistics | Alborj</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .excel-table {
+            width: 100%;
+            max-width: 1400px;
+            margin: 40px auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #1b263b;
+            color: #e0e6ed;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(65,90,119,0.13);
+        }
+        .excel-table th, .excel-table td {
+            border: 1px solid #415a77;
+            padding: 14px 10px;
+            text-align: center;
+        }
+        .excel-table th {
+            background: linear-gradient(90deg, #415a77 60%, #1b6ca8 100%);
+            font-weight: bold;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+        }
+        .excel-table td input, .excel-table td select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #e0e6ed;
+            text-align: center;
+            font-size: 1rem;
+            padding: 8px 2px;
+            border-radius: 6px;
+        }
+        .excel-table td input:focus, .excel-table td select:focus {
+            outline: 2px solid #1b6ca8;
+            background: #273a56;
+        }
+        .excel-actions {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .excel-actions button {
+            margin: 0 6px;
+            padding: 8px 22px;
+            font-size: 1rem;
+            border-radius: 22px;
+        }
+        @media (max-width: 1200px) {
+            .excel-table {
+                max-width: 98vw !important;
+                font-size: 0.98rem;
+            }
+        }
+        @media (max-width: 900px) {
+            .excel-table th, .excel-table td {
+                padding: 7px 2px;
+            }
+        }
+        @media (max-width: 600px) {
+            .excel-table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/alborj1.png" alt="logo">
+        </div>
+        <div style="margin-left:auto;">
+            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='dashboard.html'">Back</button>
+        </div>
+    </header>
+    <main>
+        <h1>Camera Statistics</h1>
+        <p style="margin-bottom:24px;">Monitor and manage camera faults and statistics below.</p>
+        <div class="excel-actions">
+            <button class="button" onclick="exportCameraStats()">Export to CSV</button>
+        </div>
+        <div style="overflow-x:auto;">
+        <table class="excel-table" id="cameraStatsTable">
+            <thead>
+                <tr>
+                    <th>NO.</th>
+                    <th>Location of Fault</th>
+                    <th>Camera Type</th>
+                    <th>Inspection Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th>Action Taken</th>
+                    <th>Reported by</th>
+                    <th>Reported to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>20</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>25</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>26</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>27</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>28</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>29</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>30</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>46</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+                <tr>
+                    <td>50</td>
+                    <td><input type="text" placeholder="Location"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Netavis">Netavis</option>
+                            <option value="IVS">IVS</option>
+                        </select>
+                    </td>
+                    <td><input type="date"></td>
+                    <td><input type="time"></td>
+                    <td>
+                        <select>
+                            <option value="" selected>Select</option>
+                            <option value="Working">Working</option>
+                            <option value="Not working">Not working</option>
+                            <option value="Faulty">Faulty</option>
+                        </select>
+                    </td>
+                    <td><input type="text" placeholder="Notes"></td>
+                    <td><input type="text" placeholder="Action Taken"></td>
+                    <td><input type="text" placeholder="Reported by"></td>
+                    <td><input type="text" placeholder="Reported to"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr style="background: #22304a;">
+                    <th colspan="2" style="font-size:1.08rem;">Camera Summary</th>
+                    <th style="color:#fcf6f7;">Not working</th>
+                    <th style="color:#f2f5f4;">Working</th>
+                    <th style="color:#faf9f7;">Total</th>
+                    <th colspan="5"></th>
+                </tr>
+                <tr style="background: #273a56;">
+                    <td colspan="2" style="font-weight:bold;">NETAVIS</td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr style="background: #273a56;">
+                    <td colspan="2" style="font-weight:bold;">IVS</td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                    <td colspan="5"></td>
+                </tr>
+                <tr style="background: #1b263b;">
+                    <td colspan="2" style="font-weight:bold; color:#faf9f8;">TOTAL</td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#22304a; color:#ffd166; font-weight:bold;"></td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#22304a; color:#ffd166; font-weight:bold;"></td>
+                    <td><input type="number" min="0" placeholder="0" readonly style="background:#22304a; color:#ffd166; font-weight:bold;"></td>
+                    <td colspan="5"></td>
+                </tr>
+            </tfoot>
+        </table>
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Abdullah.m. All rights reserved.
+    </footer>
+    <script>
+        function exportCameraStats() {
+            const table = document.getElementById('cameraStatsTable');
+            let csv = [];
+            const rows = table.querySelectorAll('tr');
+            for (let i = 0; i < rows.length; i++) {
+                let row = [], cols = rows[i].querySelectorAll('th, td');
+                for (let j = 0; j < cols.length; j++) {
+                    let input = cols[j].querySelector('input, select');
+                    if (input) {
+                        row.push(input.value);
+                    } else {
+                        row.push(cols[j].innerText.trim());
+                    }
+                }
+                if (row.length) csv.push(row.join(','));
+            }
+            // Download CSV
+            const csvFile = new Blob([csv.join('\n')], {type: "text/csv"});
+            const downloadLink = document.createElement("a");
+            downloadLink.download = "camera_statistics.csv";
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+    </script>
+</body>
+</html>
