@@ -3,7 +3,7 @@
 
 body {
     font-family: 'Montserrat', Arial, sans-serif;
-    background: 
+    background:
         linear-gradient(135deg, rgba(13,27,42,0.92) 0%, rgba(27,38,59,0.92) 100%),
         url('images/borj.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -16,12 +16,13 @@ body {
 
 /* Header */
 header {
-    background: rgba(27, 38, 59, 0.95);
+    background: rgba(27, 38, 59, 0.97);
     color: #fff;
     padding: 18px 32px;
     display: flex;
     align-items: center;
     box-shadow: 0 4px 16px rgba(13, 27, 42, 0.10);
+    border-bottom: 1.5px solid #415a77;
 }
 
 .logo img {
@@ -31,6 +32,7 @@ header {
     filter: drop-shadow(0 2px 8px rgba(65, 90, 119, 0.15));
     max-width: 30vw;
     min-width: 40px;
+    transition: width 0.2s;
 }
 
 /* Main Content */
@@ -49,13 +51,13 @@ main {
 .button, button, .form button {
     background: linear-gradient(90deg, #415a77 0%, #1b6ca8 100%);
     color: #fff;
-    padding: 12px 32px;
+    padding: 14px 38px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     font-family: 'Montserrat', Arial, sans-serif;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.13rem;
     letter-spacing: 1px;
     box-shadow: 0 4px 16px rgba(65, 90, 119, 0.13), 0 1.5px 0 #415a77 inset;
     transition: background 0.25s, transform 0.13s, box-shadow 0.18s;
@@ -74,13 +76,13 @@ main {
 
 /* Form Styling */
 .form {
-    max-width: 420px;
+    max-width: 440px;
     width: 100%;
     margin: 32px auto;
-    padding: 32px 28px;
-    background: rgba(27, 38, 59, 0.97);
-    border-radius: 18px;
-    box-shadow: 0 6px 24px rgba(13, 27, 42, 0.10);
+    padding: 36px 32px;
+    background: rgba(27, 38, 59, 0.98);
+    border-radius: 20px;
+    box-shadow: 0 6px 24px rgba(13, 27, 42, 0.13);
     border: 1.5px solid #415a77;
     box-sizing: border-box;
 }
@@ -94,11 +96,11 @@ main {
 
 .form input, .form select {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 16px;
+    padding: 14px;
+    margin-bottom: 18px;
     border: 1.5px solid #415a77;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.07rem;
     background: #0d1b2a;
     color: #e0e6ed;
     transition: border 0.2s, background 0.2s;
@@ -108,6 +110,45 @@ main {
     border: 1.5px solid #1b6ca8;
     outline: none;
     background: #1b263b;
+}
+
+/* Table Styling */
+.excel-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 32px auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #1b263b;
+    color: #e0e6ed;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(65,90,119,0.13);
+}
+.excel-table th, .excel-table td {
+    border: 1px solid #415a77;
+    padding: 18px 18px;
+    text-align: center;
+}
+.excel-table th {
+    background: linear-gradient(90deg, #415a77 60%, #1b6ca8 100%);
+    font-weight: bold;
+    font-size: 1.08rem;
+    letter-spacing: 1px;
+}
+.excel-table td input, .excel-table td select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #e0e6ed;
+    text-align: center;
+    font-size: 1rem;
+    padding: 10px 6px;
+    border-radius: 6px;
+}
+.excel-table td input:focus, .excel-table td select:focus {
+    outline: 2px solid #1b6ca8;
+    background: #273a56;
 }
 
 /* Links */
@@ -124,7 +165,7 @@ a:hover, .link:hover {
 
 /* Footer */
 footer {
-    background: rgba(27, 38, 59, 0.95);
+    background: rgba(27, 38, 59, 0.97);
     color: #fff;
     text-align: center;
     padding: 18px 0;
@@ -133,10 +174,49 @@ footer {
     margin-top: 32px;
     border-radius: 0 0 12px 12px;
     box-shadow: 0 -2px 8px rgba(13, 27, 42, 0.08);
+    border-top: 1.5px solid #415a77;
+}
+
+/* Folders (dashboard) */
+.folders-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    margin: 40px 0 0 0;
+}
+.folder {
+    background: rgba(27,38,59,0.97);
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(65,90,119,0.10);
+    padding: 32px 36px 24px 36px;
+    min-width: 180px;
+    min-height: 120px;
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.13rem;
+    font-weight: 600;
+    color: #e0e6ed;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.folder:hover {
+    border: 2px solid #1b6ca8;
+    background: rgba(27,38,59,0.99);
+    box-shadow: 0 8px 24px rgba(65,90,119,0.16);
+    color: #1b6ca8;
+}
+.folder-icon {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #1b6ca8;
 }
 
 /* Responsive Design */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .excel-table {
         max-width: 98vw !important;
         font-size: 0.98rem;
@@ -159,6 +239,18 @@ footer {
     .excel-table th, .excel-table td {
         padding: 8px 2px !important;
     }
+    .folders-container {
+        gap: 14px;
+    }
+    .folder {
+        min-width: 120px;
+        max-width: 150px;
+        font-size: 0.98rem;
+        padding: 18px 8px 14px 8px;
+    }
+    .folder-icon {
+        font-size: 1.5rem;
+    }
 }
 @media (max-width: 700px) {
     .form {
@@ -169,6 +261,18 @@ footer {
     }
     main {
         padding: 10px 2vw 20px 2vw;
+    }
+    .folders-container {
+        gap: 8px;
+    }
+    .folder {
+        min-width: 90px;
+        max-width: 110px;
+        font-size: 0.92rem;
+        padding: 10px 2px 8px 2px;
+    }
+    .folder-icon {
+        font-size: 1.1rem;
     }
 }
 @media (max-width: 500px) {
