@@ -83,6 +83,7 @@
         <p style="margin-bottom:24px;">Manage and track the walkie talkies status below.</p>
         <div class="excel-actions">
             <button class="button" onclick="exportSchedule()">Export to CSV</button>
+            <button class="button" onclick="exportSchedulePDF()">Export to PDF</button>
         </div>
         <div style="overflow-x:auto;">
         <table class="excel-table" id="scheduleTable">
@@ -627,6 +628,8 @@
         </table>
         </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         function exportSchedule() {
             const table = document.getElementById('scheduleTable');
@@ -649,6 +652,34 @@
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
+        }
+
+        function exportSchedulePDF() {
+            html2canvas(document.body, {useCORS: true, scale: 2}).then(function(canvas) {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new window.jspdf.jsPDF({
+                    orientation: 'landscape',
+                    unit: 'pt',
+                    format: 'a4'
+                });
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+
+                // احسب الأبعاد لتناسب الصفحة الواحدة
+                let imgWidth = pageWidth;
+                let imgHeight = canvas.height * imgWidth / canvas.width;
+                if (imgHeight > pageHeight) {
+                    imgHeight = pageHeight;
+                    imgWidth = canvas.width * imgHeight / canvas.height;
+                }
+
+                // ضع الصورة في منتصف الصفحة
+                const x = (pageWidth - imgWidth) / 2;
+                const y = (pageHeight - imgHeight) / 2;
+
+                pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+                pdf.save('walkie_talkies_schedule.pdf');
+            });
         }
     </script>
 </body>

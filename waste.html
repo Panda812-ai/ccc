@@ -110,9 +110,9 @@
         <div class="excel-actions">
             <button class="button" onclick="addRow()">Add Row</button>
             <button class="button" onclick="exportTable()">Export to CSV</button>
-            <button class="button" onclick="saveWasteData()">Save Data</button>
             <input type="date" id="downloadDate" style="margin-left:18px; padding:8px 12px; border-radius:8px; border:1px solid #415a77; background:#1b263b; color:#e0e6ed; font-size:1rem;">
             <button class="button" onclick="exportByDate()">Download By Date</button>
+            <button class="button" onclick="exportSchedulePDF()">Export to PDF</button>
         </div>
         <div style="text-align:center; margin-bottom:18px;">
             <input
@@ -167,6 +167,8 @@
     <footer>
         &copy; 2025 Abdullah.m. All rights reserved.
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         function logout() {
             window.location.href = "index.html";
@@ -335,6 +337,34 @@
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
+        }
+
+        function exportSchedulePDF() {
+            html2canvas(document.body, {useCORS: true, scale: 2}).then(function(canvas) {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new window.jspdf.jsPDF({
+                    orientation: 'landscape',
+                    unit: 'pt',
+                    format: 'a4'
+                });
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+
+                // احسب الأبعاد لتناسب الصفحة الواحدة
+                let imgWidth = pageWidth;
+                let imgHeight = canvas.height * imgWidth / canvas.width;
+                if (imgHeight > pageHeight) {
+                    imgHeight = pageHeight;
+                    imgWidth = canvas.width * imgHeight / canvas.height;
+                }
+
+                // ضع الصورة في منتصف الصفحة
+                const x = (pageWidth - imgWidth) / 2;
+                const y = (pageHeight - imgHeight) / 2;
+
+                pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+                pdf.save('walkie_talkies_schedule.pdf');
+            });
         }
     </script>
 </body>
