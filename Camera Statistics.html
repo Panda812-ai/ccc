@@ -64,10 +64,34 @@
                 padding: 7px 2px;
             }
         }
+        @media (max-width: 800px) {
+            .excel-table {
+                font-size: 0.93rem;
+                min-width: 700px;
+            }
+            .excel-actions button {
+                padding: 7px 12px;
+                font-size: 0.95rem;
+            }
+        }
         @media (max-width: 600px) {
             .excel-table {
                 font-size: 0.85rem;
+                min-width: 500px;
             }
+            .excel-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .excel-actions button {
+                padding: 7px 10px;
+                font-size: 0.93rem;
+            }
+        }
+        /* Make table horizontally scrollable on small screens */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -87,181 +111,178 @@
             <button class="button" onclick="exportCameraStats()">Export to CSV</button>
             <button class="button" onclick="exportTableToPDF()">Export to PDF</button>
         </div>
-
-        <!-- أضف زر إضافة صف أعلى الجدول مباشرة -->
         <div style="text-align:center; margin-bottom: 14px;">
             <button class="button" onclick="addCameraRow()">Add Row</button>
         </div>
-
-        <div style="overflow-x:auto;">
-        <table class="excel-table" id="cameraStatsTable">
-            <thead>
-                <tr>
-                    <th>NO#</th>
-                    <th>Location of Fault</th>
-                    <th>Camera Type</th>
-                    <th>Inspection Date</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                    <th>Action Taken</th>
-                    <th>Reported by</th>
-                    <th>Reported to</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Netavis">Netavis</option>
-                            <option value="IVS">IVS</option>
-                        </select>
-                    </td>
-                    <td><input type="date"></td>
-                    <td><input type="time"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Working">Working</option>
-                            <option value="Not working">Not working</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Notes"></td>
-                    <td><input type="text" placeholder="Action Taken"></td>
-                    <td><input type="text" placeholder="Reported by"></td>
-                    <td><input type="text" placeholder="Reported to"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Netavis">Netavis</option>
-                            <option value="IVS">IVS</option>
-                        </select>
-                    </td>
-                    <td><input type="date"></td>
-                    <td><input type="time"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Working">Working</option>
-                            <option value="Not working">Not working</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Notes"></td>
-                    <td><input type="text" placeholder="Action Taken"></td>
-                    <td><input type="text" placeholder="Reported by"></td>
-                    <td><input type="text" placeholder="Reported to"></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Netavis">Netavis</option>
-                            <option value="IVS">IVS</option>
-                        </select>
-                    </td>
-                    <td><input type="date"></td>
-                    <td><input type="time"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Working">Working</option>
-                            <option value="Not working">Not working</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Notes"></td>
-                    <td><input type="text" placeholder="Action Taken"></td>
-                    <td><input type="text" placeholder="Reported by"></td>
-                    <td><input type="text" placeholder="Reported to"></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Netavis">Netavis</option>
-                            <option value="IVS">IVS</option>
-                        </select>
-                    </td>
-                    <td><input type="date"></td>
-                    <td><input type="time"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Working">Working</option>
-                            <option value="Not working">Not working</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Notes"></td>
-                    <td><input type="text" placeholder="Action Taken"></td>
-                    <td><input type="text" placeholder="Reported by"></td>
-                    <td><input type="text" placeholder="Reported to"></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Netavis">Netavis</option>
-                            <option value="IVS">IVS</option>
-                        </select>
-                    </td>
-                    <td><input type="date"></td>
-                    <td><input type="time"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Working">Working</option>
-                            <option value="Not working">Not working</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Notes"></td>
-                    <td><input type="text" placeholder="Action Taken"></td>
-                    <td><input type="text" placeholder="Reported by"></td>
-                    <td><input type="text" placeholder="Reported to"></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr style="background: #22304a;">
-                    <th colspan="4" style="font-size:1.08rem;">Camera Summary</th>
-                    <th style="color:#fcf6f7;">Not Working</th>
-                    <th style="color:#f2f5f4;">Working</th>
-                    <th style="color:#f2f5f4;">Total</th>
-                    <th colspan="6"></th>
-                </tr>
-                <tr style="background: #273a56;">
-                    <td colspan="4" style="font-weight:bold;">NETAVIS</td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td colspan="6"></td>
-                </tr>
-                <tr style="background: #273a56;">
-                    <td colspan="4" style="font-weight:bold;">IVS</td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td colspan="6"></td>
-                </tr>
-                <tr style="background: #273a56;">
-                    <td colspan="4" style="font-weight:bold;">TOTAL</td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
-                    <td colspan="6"></td>
-                </tr>
-            </tfoot>
-        </table>
+        <div class="table-responsive">
+            <table class="excel-table" id="cameraStatsTable">
+                <thead>
+                    <tr>
+                        <th>NO#</th>
+                        <th>Location of Fault</th>
+                        <th>Camera Type</th>
+                        <th>Inspection Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                        <th>Action Taken</th>
+                        <th>Reported by</th>
+                        <th>Reported to</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Netavis">Netavis</option>
+                                <option value="IVS">IVS</option>
+                            </select>
+                        </td>
+                        <td><input type="date"></td>
+                        <td><input type="time"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Working">Working</option>
+                                <option value="Not working">Not working</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Notes"></td>
+                        <td><input type="text" placeholder="Action Taken"></td>
+                        <td><input type="text" placeholder="Reported by"></td>
+                        <td><input type="text" placeholder="Reported to"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Netavis">Netavis</option>
+                                <option value="IVS">IVS</option>
+                            </select>
+                        </td>
+                        <td><input type="date"></td>
+                        <td><input type="time"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Working">Working</option>
+                                <option value="Not working">Not working</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Notes"></td>
+                        <td><input type="text" placeholder="Action Taken"></td>
+                        <td><input type="text" placeholder="Reported by"></td>
+                        <td><input type="text" placeholder="Reported to"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Netavis">Netavis</option>
+                                <option value="IVS">IVS</option>
+                            </select>
+                        </td>
+                        <td><input type="date"></td>
+                        <td><input type="time"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Working">Working</option>
+                                <option value="Not working">Not working</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Notes"></td>
+                        <td><input type="text" placeholder="Action Taken"></td>
+                        <td><input type="text" placeholder="Reported by"></td>
+                        <td><input type="text" placeholder="Reported to"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Netavis">Netavis</option>
+                                <option value="IVS">IVS</option>
+                            </select>
+                        </td>
+                        <td><input type="date"></td>
+                        <td><input type="time"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Working">Working</option>
+                                <option value="Not working">Not working</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Notes"></td>
+                        <td><input type="text" placeholder="Action Taken"></td>
+                        <td><input type="text" placeholder="Reported by"></td>
+                        <td><input type="text" placeholder="Reported to"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Netavis">Netavis</option>
+                                <option value="IVS">IVS</option>
+                            </select>
+                        </td>
+                        <td><input type="date"></td>
+                        <td><input type="time"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Working">Working</option>
+                                <option value="Not working">Not working</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Notes"></td>
+                        <td><input type="text" placeholder="Action Taken"></td>
+                        <td><input type="text" placeholder="Reported by"></td>
+                        <td><input type="text" placeholder="Reported to"></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr style="background: #22304a;">
+                        <th colspan="4" style="font-size:1.08rem;">Camera Summary</th>
+                        <th style="color:#fcf6f7;">Not Working</th>
+                        <th style="color:#f2f5f4;">Working</th>
+                        <th style="color:#f2f5f4;">Total</th>
+                        <th colspan="6"></th>
+                    </tr>
+                    <tr style="background: #273a56;">
+                        <td colspan="4" style="font-weight:bold;">NETAVIS</td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr style="background: #273a56;">
+                        <td colspan="4" style="font-weight:bold;">IVS</td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td colspan="6"></td>
+                    </tr>
+                    <tr style="background: #273a56;">
+                        <td colspan="4" style="font-weight:bold;">TOTAL</td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td><input type="number" min="0" placeholder="0" readonly style="background:#1b263b; color:#e0e6ed; font-weight:bold;"></td>
+                        <td colspan="6"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
         <canvas id="cameraChart" height="300" width="1000" style="display:block;margin:40px auto 0;"></canvas>
     </main>
@@ -327,52 +348,47 @@
                 pdf.save('camera_statistics_full.pdf');
             });
         }
-// تحديث العدادات تلقائياً
-function updateCameraCounts() {
-    const tbody = document.querySelector('#cameraStatsTable tbody');
-    let netavisWorking = 0, netavisNotWorking = 0, netavisTotal = 0;
-    let ivsWorking = 0, ivsNotWorking = 0, ivsTotal = 0;
+        // تحديث العدادات تلقائياً
+        function updateCameraCounts() {
+            const tbody = document.querySelector('#cameraStatsTable tbody');
+            let netavisWorking = 0, netavisNotWorking = 0, netavisTotal = 0;
+            let ivsWorking = 0, ivsNotWorking = 0, ivsTotal = 0;
 
-    Array.from(tbody.rows).forEach(row => {
-        const type = row.cells[2]?.querySelector('select')?.value;
-        const status = row.cells[5]?.querySelector('select')?.value;
+            Array.from(tbody.rows).forEach(row => {
+                const type = row.cells[2]?.querySelector('select')?.value;
+                const status = row.cells[5]?.querySelector('select')?.value;
 
-        if (type === "Netavis") {
-            netavisTotal++;
-            if (status === "Working") netavisWorking++;
-            else if (status === "Not working") netavisNotWorking++;
-        } 
-        else if (type === "IVS") {
-            ivsTotal++;
-            if (status === "Working") ivsWorking++;
-            else if (status === "Not working") ivsNotWorking++;
+                if (type === "Netavis") {
+                    netavisTotal++;
+                    if (status === "Working") netavisWorking++;
+                    else if (status === "Not working") netavisNotWorking++;
+                } 
+                else if (type === "IVS") {
+                    ivsTotal++;
+                    if (status === "Working") ivsWorking++;
+                    else if (status === "Not working") ivsNotWorking++;
+                }
+            });
+
+            // تحديث الجدول السفلي
+            const tfoot = document.querySelector('#cameraStatsTable tfoot');
+            if (tfoot) {
+                // NETAVIS
+                tfoot.rows[1].cells[1].querySelector('input').value = netavisNotWorking; // غير شغال
+                tfoot.rows[1].cells[2].querySelector('input').value = netavisWorking;    // شغال
+                tfoot.rows[1].cells[3].querySelector('input').value = netavisTotal;      // الإجمالي فقط Netavis
+
+                // IVS
+                tfoot.rows[2].cells[1].querySelector('input').value = ivsNotWorking;
+                tfoot.rows[2].cells[2].querySelector('input').value = ivsWorking;
+                tfoot.rows[2].cells[3].querySelector('input').value = ivsTotal;
+
+                // TOTAL (Netavis + IVS)
+                tfoot.rows[3].cells[1].querySelector('input').value = netavisNotWorking + ivsNotWorking;
+                tfoot.rows[3].cells[2].querySelector('input').value = netavisWorking + ivsWorking;
+                tfoot.rows[3].cells[3].querySelector('input').value = netavisTotal + ivsTotal;
+            }
         }
-    });
-
-    // تحديث الجدول السفلي
-    const tfoot = document.querySelector('#cameraStatsTable tfoot');
-    if (tfoot) {
-        // NETAVIS
-        tfoot.rows[1].cells[1].querySelector('input').value = netavisNotWorking; // غير شغال
-        tfoot.rows[1].cells[2].querySelector('input').value = netavisWorking;    // شغال
-        tfoot.rows[1].cells[3].querySelector('input').value = netavisTotal;      // الإجمالي فقط Netavis
-
-        // IVS
-        tfoot.rows[2].cells[1].querySelector('input').value = ivsNotWorking;
-        tfoot.rows[2].cells[2].querySelector('input').value = ivsWorking;
-        tfoot.rows[2].cells[3].querySelector('input').value = ivsTotal;
-
-        // TOTAL (Netavis + IVS)
-        tfoot.rows[3].cells[1].querySelector('input').value = netavisNotWorking + ivsNotWorking;
-        tfoot.rows[3].cells[2].querySelector('input').value = netavisWorking + ivsWorking;
-        tfoot.rows[3].cells[3].querySelector('input').value = netavisTotal + ivsTotal;
-        
-        
-
-      
-    
-    }
-}
 
         // تعبئة التاريخ والوقت تلقائياً عند اختيار نوع الكاميرا أو الحالة
         document.addEventListener('DOMContentLoaded', function() {

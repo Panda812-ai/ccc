@@ -53,7 +53,7 @@
             font-size: 1rem;
             border-radius: 22px;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
             .excel-table {
                 font-size: 0.93rem;
                 max-width: 98vw;
@@ -62,10 +62,34 @@
                 padding: 7px 2px;
             }
         }
+        @media (max-width: 800px) {
+            .excel-table {
+                font-size: 0.9rem;
+                min-width: 700px;
+            }
+            .excel-actions button {
+                padding: 7px 12px;
+                font-size: 0.95rem;
+            }
+        }
         @media (max-width: 600px) {
             .excel-table {
                 font-size: 0.85rem;
+                min-width: 500px;
             }
+            .excel-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .excel-actions button {
+                padding: 7px 10px;
+                font-size: 0.93rem;
+            }
+        }
+        /* Make table horizontally scrollable on small screens */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -85,547 +109,547 @@
             <button class="button" onclick="exportSchedule()">Export to CSV</button>
             <button class="button" onclick="exportSchedulePDF()">Export to PDF</button>
         </div>
-        <div style="overflow-x:auto;">
-        <table class="excel-table" id="scheduleTable">
-            <thead>
-                <tr>
-                    <th>NO#</th>
-                    <th>User</th>
-                    <th>Location</th>
-                    <th>Device status</th>
-                    <th>Charger ratio</th>
-                    <th>Response</th>
-                    <th>Comments</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="text" value="MU" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><input type="text" value="1N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><input type="text" value="2N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><input type="text" value="3N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td><input type="text" value="4N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td><input type="text" value="5N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td><input type="text" value="6N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td><input type="text" value="7N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td><input type="text" value="8N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td><input type="text" value="9N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>11</td>
-                    <td><input type="text" value="10N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>12</td>
-                    <td><input type="text" value="11N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>13</td>
-                    <td><input type="text" value="12N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>14</td>
-                    <td><input type="text" value="13N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>15</td>
-                    <td><input type="text" value="14N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>16</td>
-                    <td><input type="text" value="15N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>17</td>
-                    <td><input type="text" value="16N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>18</td>
-                    <td><input type="text" value="17N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>19</td>
-                    <td><input type="text" value="18N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>20</td>
-                    <td><input type="text" value="19N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>21</td>
-                    <td><input type="text" value="20N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>22</td>
-                    <td><input type="text" value="21N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>23</td>
-                    <td><input type="text" value="25N" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>24</td>
-                    <td><input type="text" value="N26" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>25</td>
-                    <td><input type="text" value="1S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>26</td>
-                    <td><input type="text" value="2S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>27</td>
-                    <td><input type="text" value="3S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>28</td>
-                    <td><input type="text" value="4S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>29</td>
-                    <td><input type="text" value="5S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>30</td>
-                    <td><input type="text" value="6S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>31</td>
-                    <td><input type="text" value="8S" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>32</td>
-                    <td><input type="text" value="1MSH" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>33</td>
-                    <td><input type="text" value="1MN" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>34</td>
-                    <td><input type="text" value="2MN" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-                <tr>
-                    <td>35</td>
-                    <td><input type="text" value="MS" placeholder="User"></td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td><input type="text" placeholder="Device status"></td>
-                    <td><input type="text" placeholder="Charger ratio"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Yes">Yes</option>
-                            <option value="No">No</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Comments"></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="excel-table" id="scheduleTable">
+                <thead>
+                    <tr>
+                        <th>NO#</th>
+                        <th>User</th>
+                        <th>Location</th>
+                        <th>Device status</th>
+                        <th>Charger ratio</th>
+                        <th>Response</th>
+                        <th>Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" value="MU" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text" value="1N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><input type="text" value="2N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><input type="text" value="3N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><input type="text" value="4N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><input type="text" value="5N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><input type="text" value="6N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><input type="text" value="7N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><input type="text" value="8N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><input type="text" value="9N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><input type="text" value="10N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><input type="text" value="11N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><input type="text" value="12N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td><input type="text" value="13N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td><input type="text" value="14N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td><input type="text" value="15N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>17</td>
+                        <td><input type="text" value="16N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td><input type="text" value="17N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>19</td>
+                        <td><input type="text" value="18N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td><input type="text" value="19N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td><input type="text" value="20N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td><input type="text" value="21N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td><input type="text" value="25N" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td><input type="text" value="N26" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td><input type="text" value="1S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td><input type="text" value="2S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>27</td>
+                        <td><input type="text" value="3S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td><input type="text" value="4S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>29</td>
+                        <td><input type="text" value="5S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td><input type="text" value="6S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td><input type="text" value="8S" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td><input type="text" value="1MSH" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td><input type="text" value="1MN" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td><input type="text" value="2MN" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td><input type="text" value="MS" placeholder="User"></td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td><input type="text" placeholder="Device status"></td>
+                        <td><input type="text" placeholder="Charger ratio"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Comments"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -638,7 +662,7 @@
             for (let i = 0; i < rows.length; i++) {
                 let row = [], cols = rows[i].querySelectorAll('th, td');
                 for (let j = 0; j < 7; j++) {
-                    let input = cols[j].querySelector('input');
+                    let input = cols[j].querySelector('input, select');
                     row.push(input ? input.value : cols[j].innerText);
                 }
                 if (row.length) csv.push(row.join(','));
@@ -682,8 +706,8 @@
             });
         }
     </script>
-</body>
-</html>
-<footer>
+    <footer>
         &copy; 2025 abdullah.m. All rights reserved.
     </footer>
+</body>
+</html>

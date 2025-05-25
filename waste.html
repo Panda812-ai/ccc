@@ -63,6 +63,10 @@
         .excel-actions {
             text-align: center;
             margin-bottom: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
         }
         .excel-actions button {
             margin: 0 6px;
@@ -70,7 +74,7 @@
             font-size: 1rem;
             border-radius: 22px;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
             .excel-table {
                 font-size: 0.93rem;
                 max-width: 98vw;
@@ -79,14 +83,34 @@
                 padding: 7px 2px;
             }
         }
+        @media (max-width: 800px) {
+            .excel-table {
+                font-size: 0.9rem;
+                min-width: 700px;
+            }
+            .excel-actions button {
+                padding: 7px 12px;
+                font-size: 0.95rem;
+            }
+        }
         @media (max-width: 600px) {
             .excel-table {
                 font-size: 0.85rem;
+                min-width: 500px;
+            }
+            .excel-actions {
+                flex-direction: column;
+                gap: 8px;
             }
             .excel-actions button {
                 padding: 7px 10px;
-                font-size: 0.95rem;
+                font-size: 0.93rem;
             }
+        }
+        /* Make table horizontally scrollable on small screens */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
         }
         .excel-table td input[type="text"][placeholder="Description"] {
             min-width: 180px;
@@ -105,7 +129,7 @@
         </div>
     </header>
     <main>
-        <h1>Waste Management System</h1>
+        <h1>Waste Management</h1>
         <p style="margin-bottom:24px;">Manage and track waste data.</p>
         <div class="excel-actions">
             <button class="button" onclick="addRow()">Add Row</button>
@@ -123,45 +147,45 @@
                 oninput="filterTable()"
             >
         </div>
-        <div style="overflow-x:auto;">
-        <table class="excel-table" id="excelTable">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Camera No</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Date Updated</th>
-                    <th>Time Updated</th>
-                    <th>Note</th>
-                    <th>Sharing</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="text" placeholder="Camera No"></td>
-                    <td><input type="date" placeholder="Date"></td>
-                    <td><input type="time" placeholder="Time"></td>
-                    <td><input type="text" placeholder="Description"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Choose</option>
-                            <option value="Solved">Solved</option>
-                            <option value="Unsolved">Unsolved</option>
-                        </select>
-                    </td>
-                    <td><input type="date" placeholder="Date Updated"></td>
-                    <td><input type="time" placeholder="Time Updated"></td>
-                    <td><input type="text" placeholder="Note"></td>
-                    <td><input type="text" placeholder="Sharing"></td>
-                    <td><button onclick="deleteRow(this)" title="Delete Row">🗑️</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="excel-table" id="excelTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Camera No</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Date Updated</th>
+                        <th>Time Updated</th>
+                        <th>Note</th>
+                        <th>Sharing</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" placeholder="Camera No"></td>
+                        <td><input type="date" placeholder="Date"></td>
+                        <td><input type="time" placeholder="Time"></td>
+                        <td><input type="text" placeholder="Description"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Choose</option>
+                                <option value="Solved">Solved</option>
+                                <option value="Unsolved">Unsolved</option>
+                            </select>
+                        </td>
+                        <td><input type="date" placeholder="Date Updated"></td>
+                        <td><input type="time" placeholder="Time Updated"></td>
+                        <td><input type="text" placeholder="Note"></td>
+                        <td><input type="text" placeholder="Sharing"></td>
+                        <td><button onclick="deleteRow(this)" title="Delete Row">🗑️</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
     <footer>
@@ -275,34 +299,6 @@
             }
         }
 
-        function saveWasteData() {
-            const table = document.getElementById('excelTable');
-            const rows = table.querySelectorAll('tbody tr');
-            let data = [];
-            for (let i = 0; i < rows.length; i++) {
-                const cols = rows[i].querySelectorAll('td');
-                data.push({
-                    cameraNo: cols[1].querySelector('input').value,
-                    date: cols[2].querySelector('input').value,
-                    time: cols[3].querySelector('input').value,
-                    description: cols[4].querySelector('input').value,
-                    status: cols[5].querySelector('select').value,
-                    dateUpdated: cols[6].querySelector('input').value,
-                    timeUpdated: cols[7].querySelector('input').value,
-                    note: cols[8].querySelector('input').value,
-                    sharing: cols[9].querySelector('input').value
-                });
-            }
-            fetch('/save-waste', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(res => res.json())
-            .then(res => alert(res.message))
-            .catch(() => alert('Error saving data!'));
-        }
-
         function exportByDate() {
             const date = document.getElementById('downloadDate').value;
             if (!date) {
@@ -363,7 +359,7 @@
                 const y = (pageHeight - imgHeight) / 2;
 
                 pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
-                pdf.save('walkie_talkies_schedule.pdf');
+                pdf.save('waste_data.pdf');
             });
         }
     </script>
