@@ -101,7 +101,7 @@
             <img src="images/alborj1.png" alt="logo">
         </div>
         <div style="margin-left:auto;">
-            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="logout()">Logout</button>
+            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='dashboard.html'">Back</button>
         </div>
     </header>
 
@@ -113,7 +113,7 @@
             <button class="button" onclick="exportIncidentCSV()">Export to CSV</button>
         </div>
         <div class="table-responsive">
-            <table class="excel-table" id="incidentTable" style="min-width:1000px; width:98%; margin:auto;">
+            <table class="excel-table" id="incidentTable" style="min-width:1400px; width:98%; margin:auto;">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -126,7 +126,6 @@
                         <th>Status of Incident</th>
                         <th>DIR</th>
                         <th>Notes</th>
-                        <th>Employee</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -136,9 +135,9 @@
                         <td>
                             <select>
                                 <option value="" selected>Select</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                <option value="1">Morning</option>
+                                <option value="2">Evening</option>
+                                <option value="3">Night</option>
                             </select>
                         </td>
                         <td><input type="text" placeholder="Location"></td>
@@ -146,11 +145,8 @@
                             <select>
                                 <option value="" selected>Select</option>
                                 <option value="Incident">Incident</option>
-                                <option value="Emergency">Emergency</option>
-                                <option value="Accident">Accident</option>
                                 <option value="Observation">Observation</option>
-                                <option value="Maintenance">Maintenance</option>
-                                <option value="Safety">Safety</option>
+                                
                             </select>
                         </td>
                         <td><input type="text" placeholder="Description"></td>
@@ -164,7 +160,6 @@
                         </td>
                         <td><input type="text" placeholder="DIR"></td>
                         <td><input type="text" placeholder="Notes"></td>
-                        <td><input type="text" placeholder="Employee"></td>
                     </tr>
                 </tbody>
             </table>
@@ -184,9 +179,9 @@ function addIncidentRow() {
         <td>
             <select>
                 <option value="" selected>Select</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option value="1">Morning</option>
+                <option value="2">Evening</option>
+                <option value="3">Night</option>
             </select>
         </td>
         <td><input type="text" placeholder="Location"></td>
@@ -194,11 +189,8 @@ function addIncidentRow() {
             <select>
                 <option value="" selected>Select</option>
                 <option value="Incident">Incident</option>
-                <option value="Emergency">Emergency</option>
-                <option value="Accident">Accident</option>
                 <option value="Observation">Observation</option>
-                <option value="Maintenance">Maintenance</option>
-                <option value="Safety">Safety</option>
+               
             </select>
         </td>
         <td><input type="text" placeholder="Description"></td>
@@ -212,7 +204,6 @@ function addIncidentRow() {
         </td>
         <td><input type="text" placeholder="DIR"></td>
         <td><input type="text" placeholder="Notes"></td>
-        <td><input type="text" placeholder="Employee"></td>
     `;
 }
 
