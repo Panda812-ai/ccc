@@ -1,5 +1,7 @@
-<link rel="stylesheet" href="styles.css">
- <style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <style>
         .folders-container {
             display: flex;
             flex-wrap: wrap;
@@ -51,9 +53,49 @@
                 margin-bottom: 6px;
             }
         }
+        /* Responsive table styles */
+        @media (max-width: 1100px) {
+            #incidentTable {
+                min-width: 900px !important;
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 800px) {
+            #incidentTable {
+                min-width: 600px !important;
+                font-size: 0.9rem;
+            }
+            .excel-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        @media (max-width: 600px) {
+            #incidentTable {
+                min-width: 400px !important;
+                font-size: 0.85rem;
+            }
+            #incidentTable input,
+            #incidentTable select {
+                font-size: 0.85rem;
+                padding: 4px 6px;
+            }
+            .excel-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            main h1 {
+                font-size: 1.2rem !important;
+            }
+        }
+        /* Make table horizontally scrollable on small screens */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
     </style>
-
-    <body>
+</head>
+<body>
     <header>
         <div class="logo">
             <img src="images/alborj1.png" alt="logo">
@@ -63,79 +105,78 @@
         </div>
     </header>
 
-<main>
-    <h1 style="text-align:center; margin-top:32px;">Incident Reports</h1>
-    <p style="text-align:center; color:#fbfbfc; margin-bottom:24px;">Monitor and manage incident reports below.</p>
-    <div class="excel-actions" style="text-align:center; margin-bottom:18px;">
-        <button class="button" onclick="addIncidentRow()">Add Row</button>
-        <button class="button" onclick="exportIncidentCSV()">Export to CSV</button>
-    </div>
-    <div style="overflow-x:auto;">
-        <table class="excel-table" id="incidentTable" style="min-width:1700px; width:98%; margin:auto;">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Direct Status Time</th>
-                    <th>Shift</th>
-                    <th>Location</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Action Taken</th>
-                    <th>Status of Incident</th>
-                    <th>DIR</th>
-                    <th>Notes</th>
-                    <th>Employee</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="date"></td>
-                    <td><input type="time"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Location"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Incident">Incident</option>
-                            <option value="Emergency">Emergency</option>
-                            <option value="Accident">Accident</option>
-                            <option value="Observation">Observation</option>
-                            <option value="Maintenance">Maintenance</option>
-                            <option value="Safety">Safety</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="Description"></td>
-                    <td><input type="text" placeholder="Action Taken"></td>
-                    <td>
-                        <select>
-                            <option value="" selected>Select</option>
-                            <option value="Open">Open</option>
-                            <option value="Closed">Closed</option>
-                        </select>
-                    </td>
-                    <td><input type="text" placeholder="DIR"></td>
-                    <td><input type="text" placeholder="Notes"></td>
-                    <td><input type="text" placeholder="Employee"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
-<footer>
+    <main>
+        <h1 style="text-align:center; margin-top:32px;">Incident Reports</h1>
+        <p style="text-align:center; color:#fbfbfc; margin-bottom:24px;">Monitor and manage incident reports below.</p>
+        <div class="excel-actions" style="text-align:center; margin-bottom:18px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+            <button class="button" onclick="addIncidentRow()">Add Row</button>
+            <button class="button" onclick="exportIncidentCSV()">Export to CSV</button>
+        </div>
+        <div class="table-responsive">
+            <table class="excel-table" id="incidentTable" style="min-width:1000px; width:98%; margin:auto;">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Direct Status Time</th>
+                        <th>Shift</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Action Taken</th>
+                        <th>Status of Incident</th>
+                        <th>DIR</th>
+                        <th>Notes</th>
+                        <th>Employee</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="date"></td>
+                        <td><input type="time"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Location"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Incident">Incident</option>
+                                <option value="Emergency">Emergency</option>
+                                <option value="Accident">Accident</option>
+                                <option value="Observation">Observation</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Safety">Safety</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="Description"></td>
+                        <td><input type="text" placeholder="Action Taken"></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Open">Open</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </td>
+                        <td><input type="text" placeholder="DIR"></td>
+                        <td><input type="text" placeholder="Notes"></td>
+                        <td><input type="text" placeholder="Employee"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
         &copy; 2025 Abdullah.m. All rights reserved.
     </footer>
 
 <script>
 function addIncidentRow() {
     const tbody = document.querySelector('#incidentTable tbody');
-    const rowCount = tbody.rows.length + 1;
     const row = tbody.insertRow();
     row.innerHTML = `
         <td><input type="date"></td>
@@ -228,3 +269,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+</body>
