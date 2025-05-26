@@ -121,6 +121,7 @@
                         <th>Shift</th>
                         <th>Location</th>
                         <th>Type</th>
+                        <th>Risk Level</th>
                         <th>Description</th>
                         <th>Action Taken</th>
                         <th>Status of Incident</th>
@@ -146,7 +147,14 @@
                                 <option value="" selected>Select</option>
                                 <option value="Incident">Incident</option>
                                 <option value="Observation">Observation</option>
-                                
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="" selected>Select</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
                             </select>
                         </td>
                         <td><input type="text" placeholder="Description"></td>
@@ -190,7 +198,14 @@ function addIncidentRow() {
                 <option value="" selected>Select</option>
                 <option value="Incident">Incident</option>
                 <option value="Observation">Observation</option>
-               
+            </select>
+        </td>
+        <td>
+            <select>
+                <option value="" selected>Select</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
             </select>
         </td>
         <td><input type="text" placeholder="Description"></td>

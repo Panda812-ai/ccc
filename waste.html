@@ -124,7 +124,8 @@
         <div class="logo">
             <img src="images/alborj1.png" alt="logo">
         </div>
-        <div style="margin-left:auto;">
+        <div style="margin-left:auto; display: flex; gap: 10px;">
+            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='waste schedule.html'">Waste Schedule</button>
             <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='dashboard.html'">Back</button>
         </div>
     </header>
@@ -133,20 +134,10 @@
         <p style="margin-bottom:24px;">Manage and track waste data.</p>
         <div class="excel-actions">
             <button class="button" onclick="addRow()">Add Row</button>
-            <button class="button" onclick="exportTable()">Export to CSV</button>
-            <input type="date" id="downloadDate" style="margin-left:18px; padding:8px 12px; border-radius:8px; border:1px solid #415a77; background:#1b263b; color:#e0e6ed; font-size:1rem;">
-            <button class="button" onclick="exportByDate()">Download By Date</button>
-            <button class="button" onclick="exportSchedulePDF()">Export to PDF</button>
+            <button class="button" onclick="submitWaste()" style="background:#1b6ca8;">Submit</button>
+            <!-- تم حذف أزرار التصدير والبحث -->
         </div>
-        <div style="text-align:center; margin-bottom:18px;">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search by Camera No..."
-                style="width:260px; padding:8px 12px; border-radius:8px; border:1px solid #415a77; background:#1b263b; color:#e0e6ed; font-size:1rem;"
-                oninput="filterTable()"
-            >
-        </div>
+        <!-- تم حذف مربع البحث وخيارات التصدير -->
         <div class="table-responsive">
             <table class="excel-table" id="excelTable">
                 <thead>
@@ -157,11 +148,8 @@
                         <th>Time</th>
                         <th>Description</th>
                         <th>Status</th>
-                        <th>Date Updated</th>
-                        <th>Time Updated</th>
                         <th>Note</th>
                         <th>Sharing</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -178,11 +166,14 @@
                                 <option value="Unsolved">Unsolved</option>
                             </select>
                         </td>
-                        <td><input type="date" placeholder="Date Updated"></td>
-                        <td><input type="time" placeholder="Time Updated"></td>
                         <td><input type="text" placeholder="Note"></td>
-                        <td><input type="text" placeholder="Sharing"></td>
-                        <td><button onclick="deleteRow(this)" title="Delete Row">🗑️</button></td>
+                        <td>
+                            <select>
+                                <option value="" selected>Choose</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -191,15 +182,12 @@
     <footer>
         &copy; 2025 Abdullah.m. All rights reserved.
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
         function logout() {
             window.location.href = "index.html";
         }
 
         function addRow() {
-            // اطلب من المستخدم اسم الكاميرا
             let cameraNo = prompt("Enter Camera No:");
             if (!cameraNo || cameraNo.trim() === "") {
                 alert("Camera No is required!");
@@ -235,133 +223,70 @@
                         <option value="Unsolved">Unsolved</option>
                     </select>
                 </td>
-                <td><input type="date" placeholder="Date Updated"></td>
-                <td><input type="time" placeholder="Time Updated"></td>
                 <td><input type="text" placeholder="Note"></td>
-                <td><input type="text" placeholder="Sharing"></td>
-                <td><button onclick="deleteRow(this)" title="Delete Row">🗑️</button></td>
+                <td>
+                    <select>
+                        <option value="" selected>Choose</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </td>
             `;
         }
 
-        function deleteRow(btn) {
-            const row = btn.closest('tr');
-            row.parentNode.removeChild(row);
-            updateRowNumbers();
-        }
-
-        function updateRowNumbers() {
-            const table = document.getElementById('excelTable').getElementsByTagName('tbody')[0];
-            for (let i = 0; i < table.rows.length; i++) {
-                table.rows[i].cells[0].innerText = i + 1;
-            }
-        }
-
-        function exportTable() {
+        function submitWaste() {
+            // اجمع بيانات الجدول
             const table = document.getElementById('excelTable');
-            let csv = [];
-            const rows = table.querySelectorAll('tr');
-            for (let i = 0; i < rows.length; i++) {
-                let row = [], cols = rows[i].querySelectorAll('th, td');
-                for (let j = 0; j < cols.length - 1; j++) { // skip delete column
-                    let input = cols[j].querySelector('input, select');
-                    row.push(input ? (input.tagName === 'SELECT' ? input.value : input.value) : cols[j].innerText);
-                }
-                if (row.length) csv.push(row.join(','));
-            }
-            // Download CSV
-            const csvFile = new Blob([csv.join('\n')], {type: "text/csv"});
-            const downloadLink = document.createElement("a");
-            downloadLink.download = "waste_data.csv";
-            downloadLink.href = window.URL.createObjectURL(csvFile);
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        }
-
-        function filterTable() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const table = document.getElementById('excelTable');
-            const trs = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-            for (let i = 0; i < trs.length; i++) {
-                // Only search in Camera No column (second column)
-                const cameraCell = trs[i].cells[1];
-                let cameraValue = "";
-                if (cameraCell) {
-                    const inputField = cameraCell.querySelector('input');
-                    cameraValue = inputField ? inputField.value.toLowerCase() : cameraCell.innerText.toLowerCase();
-                }
-                if (cameraValue.indexOf(input) > -1) {
-                    trs[i].style.display = '';
-                } else {
-                    trs[i].style.display = 'none';
-                }
-            }
-        }
-
-        function exportByDate() {
-            const date = document.getElementById('downloadDate').value;
-            if (!date) {
-                alert('Please select a date first.');
-                return;
-            }
-            const table = document.getElementById('excelTable');
-            let csv = [];
             const rows = table.querySelectorAll('tbody tr');
+            let data = [];
             for (let i = 0; i < rows.length; i++) {
-                const cols = rows[i].querySelectorAll('th, td');
-                const dateInput = cols[2].querySelector('input[type="date"]');
-                if (dateInput && dateInput.value === date) {
-                    let row = [];
-                    for (let j = 0; j < cols.length - 1; j++) { // skip delete column
-                        let input = cols[j].querySelector('input, select');
-                        row.push(input ? (input.tagName === 'SELECT' ? input.value : input.value) : cols[j].innerText);
-                    }
-                    if (row.length) csv.push(row.join(','));
+                let row = [];
+                const cells = rows[i].querySelectorAll('td');
+                // اجمع القيم من كل خلية (input/select)
+                for (let j = 1; j < cells.length; j++) { // ابدأ من 1 لتجاهل رقم الصف
+                    let input = cells[j].querySelector('input, select');
+                    row.push(input ? input.value : '');
+                }
+                // فقط إذا كان هناك اسم كميرا
+                if (row[0] && row[0].trim() !== "") {
+                    data.push(row);
                 }
             }
-            if (csv.length === 0) {
-                alert('No data found for the selected date.');
+            if (data.length === 0) {
+                alert("No data to submit!");
                 return;
             }
-            // Download CSV
-            const csvFile = new Blob([csv.join('\n')], {type: "text/csv"});
-            const downloadLink = document.createElement("a");
-            downloadLink.download = "waste_data_" + date + ".csv";
-            downloadLink.href = window.URL.createObjectURL(csvFile);
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+            // خزّن البيانات في localStorage
+            localStorage.setItem('wasteData', JSON.stringify(data));
+            alert("Submitted! Data saved and will appear in Waste Schedule.");
+            // انتقل إلى waste schedule
+            window.location.href = "waste schedule.html";
         }
 
-        function exportSchedulePDF() {
-            html2canvas(document.body, {useCORS: true, scale: 2}).then(function(canvas) {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new window.jspdf.jsPDF({
-                    orientation: 'landscape',
-                    unit: 'pt',
-                    format: 'a4'
-                });
-                const pageWidth = pdf.internal.pageSize.getWidth();
-                const pageHeight = pdf.internal.pageSize.getHeight();
-
-                // احسب الأبعاد لتناسب الصفحة الواحدة
-                let imgWidth = pageWidth;
-                let imgHeight = canvas.height * imgWidth / canvas.width;
-                if (imgHeight > pageHeight) {
-                    imgHeight = pageHeight;
-                    imgWidth = canvas.width * imgHeight / canvas.height;
+        // تعبئة التاريخ والوقت تلقائياً عند إدخال اسم الكميرا
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.getElementById('excelTable');
+            table.addEventListener('input', function(e) {
+                if (
+                    e.target &&
+                    e.target.placeholder === "Camera No" &&
+                    e.target.value.trim() !== ""
+                ) {
+                    const row = e.target.closest('tr');
+                    if (row) {
+                        const dateInput = row.cells[2]?.querySelector('input[type="date"]');
+                        const timeInput = row.cells[3]?.querySelector('input[type="time"]');
+                        const now = new Date();
+                        if (dateInput && !dateInput.value) {
+                            dateInput.value = now.toISOString().slice(0,10);
+                        }
+                        if (timeInput && !timeInput.value) {
+                            timeInput.value = now.toTimeString().slice(0,5);
+                        }
+                    }
                 }
-
-                // ضع الصورة في منتصف الصفحة
-                const x = (pageWidth - imgWidth) / 2;
-                const y = (pageHeight - imgHeight) / 2;
-
-                pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
-                pdf.save('waste_data.pdf');
             });
-        }
+        });
     </script>
 </body>
 </html>
