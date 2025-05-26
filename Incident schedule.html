@@ -100,18 +100,29 @@
         <div class="logo">
             <img src="images/alborj1.png" alt="logo">
         </div>
-        <div style="margin-left:auto; display: flex; gap: 10px;">
-            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='Incident schedule.html'">Incident schedule</button>
+        <div style="margin-left:auto;">
+            <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='Incident Reports.html'">Incident Reports</button>
             <button class="button" style="padding:7px 18px; font-size:1rem;" onclick="window.location.href='dashboard.html'">Back</button>
         </div>
     </header>
 
     <main>
-        <h1 style="text-align:center; margin-top:32px;">Incident Reports</h1>
+        <h1 style="text-align:center; margin-top:32px;">Incident schedule</h1>
         <p style="text-align:center; color:#fbfbfc; margin-bottom:24px;">Monitor and manage incident reports below.</p>
         <div class="excel-actions" style="text-align:center; margin-bottom:18px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
             <button class="button" onclick="addIncidentRow()">Add Row</button>
-            <button class="button" onclick="submitIncidents()" style="background:#1b6ca8;">Submit</button>
+            <button class="button" onclick="exportIncidentCSV()">Export to CSV</button>
+            <button class="button" onclick="exportIncidentPDF()">Export to PDF</button>
+        </div>
+        <!-- أضف مربع بحث أعلى الجدول -->
+        <div style="text-align:center; margin-bottom:18px;">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by Camera, Time, Date, or Type..."
+                style="width:320px; padding:8px 12px; border-radius:8px; border:1px solid #415a77; background:#1b263b; color:#e0e6ed; font-size:1rem;"
+                oninput="filterIncidentTable()"
+            >
         </div>
         <div class="table-responsive">
             <table class="excel-table" id="incidentTable" style="min-width:1400px; width:98%; margin:auto;">
@@ -223,32 +234,49 @@ function addIncidentRow() {
     `;
 }
 
-// اجمع البيانات وأرسلها إلى Incident schedule
-function submitIncidents() {
+function exportIncidentCSV() {
     const table = document.getElementById('incidentTable');
-    const rows = table.querySelectorAll('tbody tr');
-    let data = [];
+    let csv = [];
+    const rows = table.querySelectorAll('tr');
     for (let i = 0; i < rows.length; i++) {
-        let row = [];
-        const cells = rows[i].querySelectorAll('td');
-        for (let j = 0; j < cells.length; j++) {
-            let input = cells[j].querySelector('input, select');
-            row.push(input ? input.value : '');
+        let row = [], cols = rows[i].querySelectorAll('th, td');
+        for (let j = 0; j < cols.length; j++) {
+            let input = cols[j].querySelector('input, select');
+            if (input) {
+                row.push(input.value || input.options?.[input.selectedIndex]?.text || "");
+            } else {
+                row.push(cols[j].innerText.trim());
+            }
         }
-        // أضف الصف فقط إذا كان هناك تاريخ أو وصف أو نوع
-        if (row[0] || row[6] || row[4]) {
-            data.push(row);
-        }
+        if (row.length) csv.push(row.join(','));
     }
-    if (data.length === 0) {
-        alert("No data to submit!");
-        return;
-    }
-    // خزّن البيانات في localStorage
-    localStorage.setItem('incidentData', JSON.stringify(data));
-    alert("Submitted! Data saved and will appear in Incident schedule.");
-    // انتقل إلى Incident schedule
-    window.location.href = "Incident schedule.html";
+    // Download CSV
+    const csvFile = new Blob([csv.join('\n')], {type: "text/csv"});
+    const downloadLink = document.createElement("a");
+    downloadLink.download = "incident_reports.csv";
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+}
+
+function exportIncidentPDF() {
+    const table = document.getElementById('incidentTable');
+    html2canvas(table, {useCORS: true, scale: 2}).then(function(canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new window.jspdf.jsPDF({
+            orientation: 'landscape',
+            unit: 'pt',
+            format: 'a4'
+        });
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const imgWidth = pageWidth - 40;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        pdf.addImage(imgData, 'PNG', 20, 20, imgWidth, imgHeight);
+        pdf.save('incident_reports.pdf');
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -276,5 +304,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function filterIncidentTable() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const table = document.getElementById('incidentTable');
+    const trs = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    for (let i = 0; i < trs.length; i++) {
+        // Location (col 3), Date (col 0), Time (col 1), Type (col 4)
+        const dateCell = trs[i].cells[0];
+        const timeCell = trs[i].cells[1];
+        const cameraCell = trs[i].cells[3];
+        const typeCell = trs[i].cells[4];
+
+        let dateValue = dateCell?.querySelector('input')?.value?.toLowerCase() || "";
+        let timeValue = timeCell?.querySelector('input')?.value?.toLowerCase() || "";
+        let cameraValue = cameraCell?.querySelector('input')?.value?.toLowerCase() || "";
+        let typeValue = typeCell?.querySelector('select')?.value?.toLowerCase() || "";
+
+        if (
+            cameraValue.indexOf(input) > -1 ||
+            dateValue.indexOf(input) > -1 ||
+            timeValue.indexOf(input) > -1 ||
+            typeValue.indexOf(input) > -1
+        ) {
+            trs[i].style.display = '';
+        } else {
+            trs[i].style.display = 'none';
+        }
+    }
+}
 </script>
+<!-- أضف مكتبة jsPDF و html2canvas قبل نهاية </body> إذا لم تكن موجودة -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
