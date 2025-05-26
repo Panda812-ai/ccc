@@ -8,8 +8,10 @@
     <style>
         .folders-container {
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: flex-start;
             gap: 32px;
             margin-top: 40px;
         }
@@ -30,6 +32,7 @@
             font-family: 'Montserrat', Arial, sans-serif;
             border: none;
             outline: none;
+            margin-bottom: 0;
         }
         .folder:hover {
             transform: translateY(-6px) scale(1.05);
@@ -37,10 +40,15 @@
             background: linear-gradient(135deg, #415a77 60%, #1b6ca8 100%);
         }
         .folder-icon {
-            font-size: 2.8rem;
-            margin-bottom: 12px;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
         }
-        @media (max-width: 700px) {
+        .folder-icon-img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 900px) {
             .folders-container {
                 flex-direction: column;
                 align-items: center;
@@ -54,6 +62,11 @@
             }
             .folder-icon {
                 font-size: 2rem;
+                margin-bottom: 6px;
+            }
+            .folder-icon-img {
+                width: 20px;
+                height: 20px;
                 margin-bottom: 6px;
             }
         }
@@ -73,33 +86,31 @@
         <p>Choose a folder to continue:</p>
         <div class="folders-container">
             <div class="folder" onclick="openFolder(1)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/waste.jpg" alt="Waste Management" class="folder-icon-img" />
                 Waste Management
             </div>
             <div class="folder" onclick="openFolder(2)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/Walkie Talkies.webp" alt="Walkie Talkies Schedule" class="folder-icon-img" />
                 Walkie Talkies Schedule
             </div>
             <div class="folder" onclick="openFolder(3)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/Camera Statistics.jpg" alt="Camera Statistics" class="folder-icon-img" />
                 Camera Statistics
             </div>
             <div class="folder" onclick="openFolder(4)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/Incident Reports.jpg" alt="Incident Reports" class="folder-icon-img" />
                 Incident Reports
             </div>
             <div class="folder" onclick="openFolder(5)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/ccc im.png" alt="CCC visitor log" class="folder-icon-img" />
                 CCC visitor log
             </div>
-            </div>
             <div class="folder" onclick="openFolder(6)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/Callcentre.webp" alt="Emergency Call" class="folder-icon-img" />
                 Emergency Call
             </div>
-            </div>
             <div class="folder" onclick="openFolder(7)">
-                <span class="folder-icon">&#128193;</span>
+                <img src="images/chart1.jpg" alt="Chart data" class="folder-icon-img" />
                 Chart data
             </div>
         </div>
