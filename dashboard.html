@@ -92,6 +92,16 @@
                 <span class="folder-icon">&#128193;</span>
                 CCC visitor log
             </div>
+            </div>
+            <div class="folder" onclick="openFolder(6)">
+                <span class="folder-icon">&#128193;</span>
+                Emergency Call
+            </div>
+            </div>
+            <div class="folder" onclick="openFolder(7)">
+                <span class="folder-icon">&#128193;</span>
+                Chart data
+            </div>
         </div>
     </main>
     <footer>
@@ -109,6 +119,10 @@
                 window.location.href = "Incident%20Reports.html";
             } else if(num === 5) {
                 window.location.href = "CCC%20visitor%20log.html";
+            } else if(num === 6) {
+                window.location.href = "Emergency%20call.html";
+            } else if(num === 7) {
+                window.location.href = "Chart%20data.html";
             } else {
                 alert('You selected Folder ' + num);
             }
